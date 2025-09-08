@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema(
       unique: true,
       trim: true,
       lowercase: true,
-      match: [/\+@\+\.\s+/, "Invalid email address."],
+      match: [/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/, "Invalid email address."],
     },
     passwd: {
       type: String,
