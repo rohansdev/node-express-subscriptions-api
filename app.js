@@ -25,6 +25,7 @@ import { PORT, API_VERSION } from "./config/env.js";
 import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import subscriptionRouterRouter from "./routes/subscription.routes.js";
+import connectToDb from "./database/mongodb.js";
 
 const app = express();
 
@@ -39,6 +40,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`API running on http://localhost:${PORT}/api/${API_VERSION}`);
+
+  await connectToDb();
 });

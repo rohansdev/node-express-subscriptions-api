@@ -2,4 +2,4 @@ import { config } from "dotenv";
 
 config({ path: `.env.${process.env.NODE_ENV || "development"}.local` });
 
-export const { NODE_ENV, PORT, API_VERSION } = process.env;
+export const { NODE_ENV, PORT, API_VERSION, MONGODB_URI } = process.env;
