@@ -1,38 +1,28 @@
-// var express = require('express');
-// var path = require('path');
-// var cookieParser = require('cookie-parser');
-// var logger = require('morgan');
-
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-
-// var app = express();
-
-// app.use(logger('dev'));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-
-// module.exports = app;
-
-//Custom code begins here
 import express from "express";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
 import { PORT, API_VERSION } from "./config/env.js";
 import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import subscriptionRouterRouter from "./routes/subscription.routes.js";
 import connectToDb from "./database/mongodb.js";
+import errorMiddleware from "./middlewares/error.middleware.js";
 
 const app = express();
 
-//Use routes
+//middlewares
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+//use routes
 app.use(`/api/${API_VERSION}/auth`, authRouter);
 app.use(`/api/${API_VERSION}/users`, userRouter);
 app.use(`/api/${API_VERSION}/subscriptions`, subscriptionRouterRouter);
+
+//custom middlewares
+app.use(errorMiddleware);
 
 app.get("/", (req, res) => {
   res.status(200).json({
