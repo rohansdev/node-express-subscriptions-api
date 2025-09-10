@@ -26,14 +26,14 @@ const subscriptionSchema = mongoose.Schema(
     category: {
       type: String,
       enum: [
-        "sports",
-        "news",
-        "entertainment",
-        "lifestyle",
-        "technology",
-        "finance",
-        "politics",
-        "other",
+        "Sports",
+        "News",
+        "Entertainment",
+        "Lifestyle",
+        "Technology",
+        "Finance",
+        "Politics",
+        "Other",
       ],
       required: true,
     },
@@ -57,7 +57,7 @@ const subscriptionSchema = mongoose.Schema(
     },
     renewalDate: {
       type: Date,
-      required: true,
+      required: false,
       validate: {
         validator: function (value) {
           return value > this.startDate;
