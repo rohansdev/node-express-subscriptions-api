@@ -9,7 +9,7 @@ const REMINDERS = [7, 5, 2, 1];
 export const sendReminders = serve(async (context) => {
   const { subscriptionId } = context.requestPayload;
 
-  const subscription = fetchSubscription(context, subscriptionId);
+  const subscription = await fetchSubscription(context, subscriptionId);
 
   if (!subscription || subscription.status !== "active") return;
 
@@ -37,7 +37,7 @@ export const sendReminders = serve(async (context) => {
 });
 
 const fetchSubscription = async (context, subscriptionId) => {
-  return await context.run("Get subscription", () => {
+  return await context.run("Get subscription", async () => {
     return Subscription.findById(subscriptionId).populate("user", "name email");
   });
 };
