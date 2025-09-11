@@ -8,6 +8,7 @@ import subscriptionRouterRouter from "./routes/subscription.routes.js";
 import connectToDb from "./database/mongodb.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
+import workflowRouter from "./routes/workflow.routes.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(`/api/${API_VERSION}/auth`, authRouter);
 app.use(`/api/${API_VERSION}/users`, userRouter);
 app.use(`/api/${API_VERSION}/subscriptions`, subscriptionRouterRouter);
+app.use(`/api/${API_VERSION}/workflows`, workflowRouter);
 
 //custom middlewares
 app.use(errorMiddleware);
