@@ -8,3 +8,5 @@ const transporter = nodemailer.createTransport({
     pass: EMAIL_PASSWD,
   },
 });
+
+export default transporter;
